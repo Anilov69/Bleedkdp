@@ -25,7 +25,14 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
         }
         h1 { font-size: 1.5rem; text-align: center; color: #4facfe; }
+        .intro {
+            margin: 0.75rem 0 0;
+            color: #cccccc;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
         label { display: block; margin-top: 1rem; font-weight: bold; font-size: 0.9rem; color: #aaaaaa; }
+        .hint { margin: 0.35rem 0 0; color: #8f8f8f; font-size: 0.85rem; }
         input {
             width: 100%;
             padding: 0.8rem;
@@ -58,6 +65,22 @@
             border-radius: 4px;
         }
         .results-text { margin: 0.5rem 0; font-size: 1.1rem; }
+        .results-note {
+            margin: 0.75rem 0 0;
+            color: #bbbbbb;
+            font-size: 0.85rem;
+            line-height: 1.45;
+        }
+        .error {
+            display: none;
+            margin-top: 1rem;
+            padding: 0.8rem;
+            border-radius: 4px;
+            background-color: #3a1f1f;
+            border-left: 4px solid #ff6b6b;
+            color: #ffd6d6;
+            font-size: 0.9rem;
+        }
         
         /* The Monetization Trap */
         .upsell {
@@ -86,22 +109,28 @@
 
     <div class="container">
         <h1>KDP Cover Dimension Calculator</h1>
+        <p class="intro">Enter your trim size and page count to get your full wrap dimensions for a paperback cover with bleed.</p>
         
         <label for="width">Trim Width (inches)</label>
         <input type="number" id="width" value="6" step="0.1">
+        <p class="hint">Example: 6 for a 6" x 9" book.</p>
 
         <label for="height">Trim Height (inches)</label>
         <input type="number" id="height" value="9" step="0.1">
+        <p class="hint">Example: 9 for a 6" x 9" book.</p>
 
         <label for="pages">Page Count</label>
         <input type="number" id="pages" value="120">
+        <p class="hint">Use the final interior page count in your print-ready PDF.</p>
 
         <button onclick="calculateCover()">Calculate Dimensions</button>
+        <div id="error" class="error"></div>
 
         <div id="results">
             <p class="results-text"><strong>Spine Width:</strong> <span id="spine"></span> inches</p>
             <p class="results-text"><strong>Full Cover Width:</strong> <span id="totalWidth"></span> inches</p>
             <p class="results-text"><strong>Full Cover Height:</strong> <span id="totalHeight"></span> inches</p>
+            <p class="results-note">Assumptions: white paper spine calculation (0.002252" per page) and 0.125" bleed on top, bottom, and outer edges.</p>
         </div>
 
         <div class="upsell">
@@ -116,6 +145,23 @@
             const width = parseFloat(document.getElementById('width').value);
             const height = parseFloat(document.getElementById('height').value);
             const pages = parseInt(document.getElementById('pages').value);
+            const error = document.getElementById('error');
+            const results = document.getElementById('results');
+
+            error.style.display = 'none';
+            results.style.display = 'none';
+
+            if (!Number.isFinite(width) || !Number.isFinite(height) || !Number.isInteger(pages)) {
+                error.innerText = 'Please enter valid numeric values for width, height, and page count.';
+                error.style.display = 'block';
+                return;
+            }
+
+            if (width <= 0 || height <= 0 || pages <= 0) {
+                error.innerText = 'Width, height, and page count must all be greater than zero.';
+                error.style.display = 'block';
+                return;
+            }
             
             // Formula for standard white paper thickness
             const spineWidth = pages * 0.002252;
@@ -129,7 +175,7 @@
             document.getElementById('totalWidth').innerText = totalWidth.toFixed(3);
             document.getElementById('totalHeight').innerText = totalHeight.toFixed(3);
             
-            document.getElementById('results').style.display = 'block';
+            results.style.display = 'block';
         }
     </script>
 </body>
