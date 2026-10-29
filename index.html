@@ -1,136 +1,46 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Free Amazon KDP cover dimension and bleed calculator. Instantly get exact pixel and inch requirements for your self-published book covers to avoid Amazon rejection.">
-    <title>Amazon KDP Cover Bleed & Dimension Calculator | Anilovbaker</title>
-    <style>
-        body {
-            font-family: system-ui, -apple-system, sans-serif;
-            background-color: #121212;
-            color: #ffffff;
-            margin: 0;
-            padding: 2rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .container {
-            background-color: #1e1e1e;
-            padding: 2rem;
-            border-radius: 8px;
-            max-width: 500px;
-            width: 100%;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-        }
-        h1 { font-size: 1.5rem; text-align: center; color: #4facfe; }
-        label { display: block; margin-top: 1rem; font-weight: bold; font-size: 0.9rem; color: #aaaaaa; }
-        input {
-            width: 100%;
-            padding: 0.8rem;
-            margin-top: 0.5rem;
-            border: 1px solid #333;
-            border-radius: 4px;
-            background-color: #2a2a2a;
-            color: white;
-            box-sizing: border-box;
-        }
-        button {
-            width: 100%;
-            padding: 1rem;
-            margin-top: 1.5rem;
-            background-color: #4facfe;
-            color: #121212;
-            border: none;
-            border-radius: 4px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        button:hover { background-color: #3b8cd2; }
-        #results {
-            display: none;
-            margin-top: 1.5rem;
-            padding: 1rem;
-            background-color: #2a2a2a;
-            border-left: 4px solid #4facfe;
-            border-radius: 4px;
-        }
-        .results-text { margin: 0.5rem 0; font-size: 1.1rem; }
-        
-        /* The Monetization Trap */
-        .upsell {
-            margin-top: 2.5rem;
-            padding: 1.5rem;
-            background-color: #2c2114;
-            border: 1px dashed #f39c12;
-            border-radius: 8px;
-            text-align: center;
-        }
-        .upsell p.hook { margin: 0 0 0.5rem 0; color: #f1c40f; font-weight: bold; }
-        .upsell p.offer { margin: 0 0 1.5rem 0; font-size: 0.9rem; color: #cccccc; }
-        .upsell a {
-            color: #121212;
-            background-color: #f1c40f;
-            padding: 0.8rem 1.5rem;
-            text-decoration: none;
-            border-radius: 4px;
-            font-weight: bold;
-            display: inline-block;
-        }
-        .upsell a:hover { background-color: #d4ac0d; }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Free KDP paperback cover calculator for spine width, bleed, full-cover size, and print-ready pixel dimensions.">
+<meta name="theme-color" content="#0b1120">
+<meta property="og:title" content="BleedKDP Cover Calculator">
+<meta property="og:description" content="Calculate accurate paperback cover dimensions in seconds.">
+<title>BleedKDP | Paperback Cover Calculator</title>
+<style>
+:root{color-scheme:dark;--bg:#0b1120;--card:rgba(18,30,50,.84);--soft:rgba(255,255,255,.055);--text:#f7f9fc;--muted:#9eabc0;--line:rgba(157,181,216,.2);--blue:#70d6ff;--violet:#9d8cff;--gold:#ffd166;--red:#ff8e9e;--green:#8be6bf;--shadow:0 24px 70px rgba(0,0,0,.34)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{min-height:100vh;margin:0;font:1rem/1.5 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--text);background:radial-gradient(circle at 8% 0%,rgba(74,169,255,.2),transparent 34rem),radial-gradient(circle at 92% 10%,rgba(112,214,255,.11),transparent 30rem),var(--bg)}
+.shell{width:min(1120px,calc(100% - 2rem));margin:auto;padding:1.5rem 0 3rem}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:4rem}.brand{display:flex;align-items:center;gap:.7rem;color:var(--text);text-decoration:none;font-weight:800;letter-spacing:-.02em}.mark{display:grid;place-items:center;width:2.25rem;height:2.25rem;border-radius:.75rem;color:#06101e;background:linear-gradient(135deg,var(--blue),var(--violet));box-shadow:0 8px 24px rgba(112,214,255,.25)}.top small{color:var(--muted)}.hero{max-width:760px;margin-bottom:2.5rem}.eyebrow{margin:0 0 .8rem;color:var(--blue);font-size:.76rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase}h1{max-width:700px;margin:0;font-size:clamp(2.4rem,6vw,4.7rem);line-height:1.02;letter-spacing:-.065em}.hero p:last-child{max-width:610px;margin:1.2rem 0 0;color:var(--muted);font-size:clamp(1rem,2vw,1.18rem)}.grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(300px,.9fr);gap:1.25rem;align-items:start}.card{border:1px solid var(--line);border-radius:1.4rem;background:var(--card);box-shadow:var(--shadow);backdrop-filter:blur(18px)}.calc,.info{padding:clamp(1.25rem,4vw,2rem)}.heading{display:flex;justify-content:space-between;gap:1rem;margin-bottom:1.5rem}.heading h2,.info h2{margin:0;font-size:1.35rem;letter-spacing:-.03em}.hint{margin:.25rem 0 0;color:var(--muted);font-size:.78rem}.step{padding:.35rem .6rem;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:.72rem;font-weight:700;white-space:nowrap}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}.field{display:grid;gap:.45rem}.full{grid-column:1/-1}label{color:#dce5f4;font-size:.86rem;font-weight:700}input,select{width:100%;min-height:3rem;padding:.75rem .85rem;border:1px solid var(--line);border-radius:.75rem;color:var(--text);background:rgba(4,11,23,.62);font:inherit;outline:0;transition:.16s}input:hover,select:hover{background:rgba(4,11,23,.82)}input:focus,select:focus,button:focus-visible,a:focus-visible{border-color:var(--blue);box-shadow:0 0 0 4px rgba(112,214,255,.16);outline:0}input[aria-invalid=true]{border-color:var(--red)}.error{min-height:1.1rem;margin:0;color:var(--red);font-size:.76rem}.primary,.secondary{min-height:3.1rem;border:0;border-radius:.8rem;font:inherit;font-weight:800;cursor:pointer;transition:transform .16s,filter .16s}.primary{width:100%;margin-top:.4rem;color:#06101e;background:linear-gradient(110deg,var(--blue),#a7e4ff);box-shadow:0 12px 30px rgba(74,169,255,.22)}.primary:hover,.secondary:hover{filter:brightness(1.08);transform:translateY(-1px)}.results{display:none;margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--line)}.results.show{display:block;animation:reveal .28s ease both}@keyframes reveal{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}.banner{display:flex;gap:.75rem;padding:.9rem 1rem;border:1px solid rgba(139,230,191,.25);border-radius:.8rem;color:var(--green);background:rgba(139,230,191,.08);font-size:.84rem}.banner strong{display:block;color:var(--text)}.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin:1rem 0}.result{padding:1rem;border:1px solid var(--line);border-radius:.9rem;background:var(--soft)}.result label{display:block;color:var(--muted);font-size:.76rem;font-weight:400}.value{display:block;margin-top:.25rem;font-size:1.3rem;font-weight:800;letter-spacing:-.03em}.value small{color:var(--muted);font-size:.72rem;font-weight:500;letter-spacing:0}.actions{display:flex;gap:.7rem}.secondary{flex:1;padding:.7rem 1rem;color:var(--text);border:1px solid var(--line);background:var(--soft)}.status{min-height:1.2rem;margin:.75rem 0 0;color:var(--green);font-size:.78rem;text-align:center}.info h2{margin-bottom:1.2rem}.features{display:grid;gap:1rem;margin:0;padding:0;list-style:none}.features li{display:grid;grid-template-columns:2rem 1fr;gap:.75rem}.icon{display:grid;place-items:center;width:2rem;height:2rem;border-radius:.65rem;color:var(--blue);background:rgba(112,214,255,.1);font-weight:800}.features strong{display:block;font-size:.9rem}.features span{display:block;color:var(--muted);font-size:.82rem}.note{margin:1.5rem 0 0;padding:.9rem 1rem;border-left:2px solid var(--gold);color:var(--muted);background:rgba(255,209,102,.06);font-size:.78rem}.cta{display:flex;justify-content:space-between;align-items:center;gap:1.5rem;margin-top:1.25rem;padding:1.2rem 1.35rem;border:1px solid rgba(255,209,102,.24);border-radius:1.1rem;background:linear-gradient(110deg,rgba(255,209,102,.1),rgba(112,214,255,.06))}.cta p{margin:0;color:var(--muted);font-size:.84rem}.cta strong{display:block;color:var(--text);font-size:.95rem}.cta a{padding:.7rem 1rem;border:1px solid rgba(255,209,102,.55);border-radius:.7rem;color:var(--gold);font-size:.8rem;font-weight:800;text-decoration:none;white-space:nowrap}footer{margin-top:2rem;color:var(--muted);font-size:.76rem;text-align:center}@media(max-width:760px){.top{margin-bottom:3rem}.top small{display:none}.grid{grid-template-columns:1fr}}@media(max-width:480px){.shell{width:calc(100% - 1.2rem);padding-top:1rem}.form-grid,.result-grid{grid-template-columns:1fr}.full{grid-column:auto}.actions,.cta{flex-direction:column;align-items:stretch}.cta a{text-align:center}}
+</style>
 </head>
 <body>
-
-    <div class="container">
-        <h1>KDP Cover Dimension Calculator</h1>
-        
-        <label for="width">Trim Width (inches)</label>
-        <input type="number" id="width" value="6" step="0.1">
-
-        <label for="height">Trim Height (inches)</label>
-        <input type="number" id="height" value="9" step="0.1">
-
-        <label for="pages">Page Count</label>
-        <input type="number" id="pages" value="120">
-
-        <button onclick="calculateCover()">Calculate Dimensions</button>
-
-        <div id="results">
-            <p class="results-text"><strong>Spine Width:</strong> <span id="spine"></span> inches</p>
-            <p class="results-text"><strong>Full Cover Width:</strong> <span id="totalWidth"></span> inches</p>
-            <p class="results-text"><strong>Full Cover Height:</strong> <span id="totalHeight"></span> inches</p>
-        </div>
-
-        <div class="upsell">
-            <p class="hook">Still getting PDF layout errors?</p>
-            <p class="offer">Whether it is a custom blood pressure logbook or a complex manuscript, I will professionally fix your bleed areas and format your cover for guaranteed KDP approval for just $10.</p>
-            <a href="#">Hire Me to Fix Your File</a>
-        </div>
-    </div>
-
-    <script>
-        function calculateCover() {
-            const width = parseFloat(document.getElementById('width').value);
-            const height = parseFloat(document.getElementById('height').value);
-            const pages = parseInt(document.getElementById('pages').value);
-            
-            // Formula for standard white paper thickness
-            const spineWidth = pages * 0.002252;
-            // Standard KDP bleed requirement is 0.125 inches on top, bottom, and outside edges
-            const bleed = 0.125;
-            
-            const totalWidth = (width * 2) + spineWidth + (bleed * 2);
-            const totalHeight = height + (bleed * 2);
-
-            document.getElementById('spine').innerText = spineWidth.toFixed(3);
-            document.getElementById('totalWidth').innerText = totalWidth.toFixed(3);
-            document.getElementById('totalHeight').innerText = totalHeight.toFixed(3);
-            
-            document.getElementById('results').style.display = 'block';
-        }
-    </script>
+<main class="shell">
+<header class="top"><a class="brand" href="./" aria-label="BleedKDP home"><span class="mark" aria-hidden="true">BK</span><span>BleedKDP</span></a><small>Built for independent publishers</small></header>
+<section class="hero"><p class="eyebrow">KDP cover toolkit</p><h1>Get your cover dimensions right the first time.</h1><p>Calculate paperback spine width, bleed, full-cover size, and print-ready pixels in seconds. No guesswork. No sign-up.</p></section>
+<section class="grid" aria-label="KDP cover calculator">
+<form class="card calc" id="form" novalidate>
+<div class="heading"><div><h2>Build your cover specs</h2><p class="hint">Use the trim size from your KDP setup.</p></div><span class="step">01 / 01</span></div>
+<div class="form-grid">
+<div class="field"><label for="width">Trim width (in)</label><input id="width" type="number" value="6" min=".1" max="100" step=".01" required><p class="error" id="width-error" role="alert"></p></div>
+<div class="field"><label for="height">Trim height (in)</label><input id="height" type="number" value="9" min=".1" max="100" step=".01" required><p class="error" id="height-error" role="alert"></p></div>
+<div class="field"><label for="pages">Page count</label><input id="pages" type="number" value="120" min="1" max="2000" step="1" required><p class="error" id="pages-error" role="alert"></p></div>
+<div class="field"><label for="dpi">Resolution (DPI)</label><input id="dpi" type="number" value="300" min="72" max="600" step="1" required><p class="error" id="dpi-error" role="alert"></p></div>
+<div class="field"><label for="paper">Interior paper</label><select id="paper"><option value="white">White paper</option><option value="cream">Cream paper</option><option value="color">Color paper</option></select><p class="error" aria-hidden="true"></p></div>
+<div class="field"><label for="binding">Binding</label><select id="binding"><option value="paperback">Paperback</option><option value="hardcover">Hardcover</option></select><p class="error" aria-hidden="true"></p></div>
+<div class="full"><button class="primary" type="submit">Calculate my cover size <span aria-hidden="true">&rarr;</span></button></div>
+</div>
+<div class="results" id="results" aria-live="polite" aria-atomic="true"><div class="banner"><span aria-hidden="true">&#10003;</span><div><strong>Your cover is ready to build.</strong><span id="assumption"></span></div></div><div class="result-grid"><div class="result"><label>Spine width</label><span class="value"><span id="spine"></span> <small>in</small></span></div><div class="result"><label>Full cover width</label><span class="value"><span id="total-width"></span> <small>in</small></span></div><div class="result"><label>Full cover height</label><span class="value"><span id="total-height"></span> <small>in</small></span></div><div class="result"><label>Pixel canvas</label><span class="value"><span id="pixels"></span> <small>px</small></span></div></div><div class="actions"><button class="secondary" id="copy" type="button">Copy dimensions</button><button class="secondary" id="download" type="button">Download summary</button></div><p class="status" id="status" role="status"></p></div>
+</form>
+<aside class="card info"><h2>A cleaner way to prep your cover</h2><ul class="features"><li><span class="icon">&#10003;</span><div><strong>Bleed included</strong><span>We add 0.125 in to the top, bottom, and outside edges.</span></div></li><li><span class="icon">&#10003;</span><div><strong>Paper-aware spine</strong><span>Choose your interior stock for a more useful estimate.</span></div></li><li><span class="icon">&#10003;</span><div><strong>Print-ready pixels</strong><span>Get a rounded canvas at your chosen DPI, usually 300.</span></div></li><li><span class="icon">&#10003;</span><div><strong>Easy to share</strong><span>Copy specs or download a text summary for your designer.</span></div></li></ul><p class="note"><strong>Good to know:</strong> Spine factors are estimates. Always compare your final PDF with the official KDP calculator or template before publishing.</p></aside>
+</section>
+<section class="cta"><p><strong>Want a second pair of eyes?</strong>Get help checking your cover layout before uploading it.</p><a href="https://github.com/Anilov69/Bleedkdp/issues/new" target="_blank" rel="noopener noreferrer">Request formatting help &rarr;</a></section><footer>Free to use. Made for authors, designers, and small publishers.</footer>
+</main>
+<script>
+(()=>{const form=document.getElementById('form'),results=document.getElementById('results'),status=document.getElementById('status');let summary='';const factors={white:['white paper',.002252],cream:['cream paper',.0025],color:['color paper',.002347]};
+function number(id,label,min,max,integer){const input=document.getElementById(id),error=document.getElementById(id+'-error'),value=Number(input.value);let message='';if(!Number.isFinite(value))message=label+' is required.';else if(value<min)message=label+' must be at least '+min+'.';else if(value>max)message=label+' must be no more than '+max+'.';else if(integer&&!Number.isInteger(value))message=label+' must be a whole number.';input.setAttribute('aria-invalid',message?'true':'false');error.textContent=message;return message?null:value}
+form.addEventListener('submit',event=>{event.preventDefault();status.textContent='';const w=number('width','Trim width',.1,100),h=number('height','Trim height',.1,100),p=number('pages','Page count',1,2000,true),d=number('dpi','Resolution',72,600,true);if([w,h,p,d].includes(null)){results.classList.remove('show');return}if(document.getElementById('binding').value==='hardcover'){results.classList.remove('show');status.style.color='var(--gold)';status.textContent='Hardcover sizing varies by KDP template. Select Paperback for a spine calculation.';return}const paper=factors[document.getElementById('paper').value],bleed=.125,spine=p*paper[1],tw=w*2+spine+bleed*2,th=h+bleed*2,pw=Math.round(tw*d),ph=Math.round(th*d);document.getElementById('spine').textContent=spine.toFixed(3);document.getElementById('total-width').textContent=tw.toFixed(3);document.getElementById('total-height').textContent=th.toFixed(3);document.getElementById('pixels').textContent=pw.toLocaleString()+' x '+ph.toLocaleString();document.getElementById('assumption').textContent=' Based on '+p+' pages of '+paper[0]+' at '+d+' DPI, with 0.125 in bleed.';summary=['BleedKDP cover dimensions','Trim size: '+w.toFixed(2)+' x '+h.toFixed(2)+' in','Pages: '+p+' ('+paper[0]+')','Spine: '+spine.toFixed(3)+' in','Full cover: '+tw.toFixed(3)+' x '+th.toFixed(3)+' in','Pixel canvas: '+pw+' x '+ph+' px at '+d+' DPI'].join('\n');status.style.color='var(--green)';results.classList.add('show')});
+document.getElementById('copy').addEventListener('click',async()=>{if(!summary)return;try{await navigator.clipboard.writeText(summary);status.textContent='Dimensions copied to your clipboard.'}catch(e){status.style.color='var(--gold)';status.textContent='Copy was blocked. Use Download summary instead.'}});document.getElementById('download').addEventListener('click',()=>{if(!summary)return;const url=URL.createObjectURL(new Blob([summary],{type:'text/plain'})),a=document.createElement('a');a.href=url;a.download='bleedkdp-cover-dimensions.txt';a.click();URL.revokeObjectURL(url);status.textContent='Summary downloaded.'})})();
+</script>
 </body>
 </html>
