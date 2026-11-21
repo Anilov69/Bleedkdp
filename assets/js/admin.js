@@ -106,7 +106,10 @@
       data.products = Array.isArray(parsed.products) ? parsed.products : [];
     }).catch(function (err) {
       if (err.status === 404) {
-        return api('').then(function () { sha = null; }); // repo exists, file doesn't yet
+        return api('').then(function () { // repo exists, file doesn't yet
+          sha = null;
+          data = { settings: Object.assign({}, DEFAULT_SETTINGS), products: [] };
+        });
       }
       throw err;
     });
@@ -485,6 +488,9 @@
   function logout() {
     localStorage.removeItem(STORAGE_KEY);
     config = null;
+    sha = null;
+    data = { settings: Object.assign({}, DEFAULT_SETTINGS), products: [] };
+    resetForm();
     showLogin();
   }
 
