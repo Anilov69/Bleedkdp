@@ -1,246 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Free Amazon KDP cover dimension and bleed calculator. Instantly get exact pixel and inch requirements for your self-published book covers to avoid Amazon rejection.">
-    <meta name="google-site-verification" content="HXg6Y53m2uAhf8PU9_d7s4_Q2oeQaEiFQSJh0SvhK9E" />
-    <title>Amazon KDP Cover Bleed & Dimension Calculator | Anilovbaker</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-main: #0f1117;
-            --bg-card: #1c1f2e;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --accent: #3b82f6;
-            --accent-glow: rgba(59, 130, 246, 0.5);
-            --border: #334155;
-        }
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-main);
-            color: var(--text-main);
-            margin: 0;
-            padding: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            box-sizing: border-box;
-        }
-        .container {
-            background-color: var(--bg-card);
-            padding: 2.5rem;
-            border-radius: 16px;
-            max-width: 480px;
-            width: 100%;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.05);
-            box-sizing: border-box;
-            margin-top: 2rem;
-        }
-        h1 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            text-align: center;
-            margin: 0 0 0.5rem 0;
-            background: linear-gradient(135deg, #60a5fa, #a78bfa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .subtitle {
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-bottom: 2.5rem;
-        }
-        .input-group {
-            margin-bottom: 1.2rem;
-        }
-        label {
-            display: block;
-            font-size: 0.85rem;
-            font-weight: 500;
-            color: var(--text-muted);
-            margin-bottom: 0.4rem;
-        }
-        input {
-            width: 100%;
-            padding: 1rem;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            background-color: rgba(0,0,0,0.2);
-            color: var(--text-main);
-            font-size: 1rem;
-            font-family: 'Inter', sans-serif;
-            box-sizing: border-box;
-            transition: all 0.2s ease;
-            -webkit-appearance: none;
-        }
-        input:focus {
-            outline: none;
-            border-color: var(--accent);
-            box-shadow: 0 0 0 3px var(--accent-glow);
-        }
-        button {
-            width: 100%;
-            padding: 1rem;
-            margin-top: 1rem;
-            background: linear-gradient(135deg, var(--accent), #6366f1);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            box-shadow: 0 4px 14px rgba(99, 102, 241, 0.3);
-        }
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
-        }
-        #results {
-            display: none;
-            margin-top: 2rem;
-            padding: 1.5rem;
-            background: rgba(59, 130, 246, 0.05);
-            border: 1px solid rgba(59, 130, 246, 0.2);
-            border-radius: 12px;
-            animation: slideDown 0.3s ease-out;
-        }
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .result-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.75rem 0;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
-        .result-item:last-child {
-            border-bottom: none;
-        }
-        .result-label {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-        .result-value {
-            font-weight: 700;
-            font-size: 1.1rem;
-            color: #60a5fa;
-        }
-        
-        /* Premium Service Card */
-        .upsell-card {
-            margin-top: 2.5rem;
-            background: linear-gradient(145deg, #2a2118, #1a1612);
-            border: 1px solid rgba(217, 119, 6, 0.3);
-            border-radius: 12px;
-            padding: 1.75rem;
-            text-align: center;
-            box-shadow: 0 4px 20px rgba(217, 119, 6, 0.05);
-        }
-        .upsell-card h3 {
-            color: #fbbf24;
-            margin: 0 0 0.75rem 0;
-            font-size: 1.1rem;
-        }
-        .upsell-card p {
-            color: #d1d5db;
-            font-size: 0.9rem;
-            line-height: 1.6;
-            margin: 0 0 1.5rem 0;
-        }
-        .upsell-card a {
-            display: inline-block;
-            background-color: #fbbf24;
-            color: #78350f;
-            text-decoration: none;
-            padding: 0.85rem 1.75rem;
-            border-radius: 8px;
-            font-weight: 700;
-            font-size: 0.95rem;
-            transition: all 0.2s ease;
-            width: 100%;
-            box-sizing: border-box;
-        }
-        .upsell-card a:hover {
-            background-color: #f59e0b;
-            transform: translateY(-2px);
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anilovbaker Picks | Hand-picked Amazon Finds</title>
+  <meta name="description" content="A curated collection of hand-picked Amazon products — everyday essentials, smart upgrades and gift ideas, all in one place.">
+  <meta name="google-site-verification" content="HXg6Y53m2uAhf8PU9_d7s4_Q2oeQaEiFQSJh0SvhK9E" />
+  <meta property="og:title" content="Anilovbaker Picks | Hand-picked Amazon Finds">
+  <meta property="og:description" content="A curated collection of hand-picked Amazon products worth your money.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://anilovbaker.tech/">
+  <meta name="theme-color" content="#0f172a">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
-
-    <div class="container">
-        <h1>KDP Dimension Tool</h1>
-        <div class="subtitle">Calculate exact bleed & spine requirements</div>
-        
-        <div class="input-group">
-            <label for="width">Trim Width (inches)</label>
-            <input type="number" id="width" value="6" step="0.1">
-        </div>
-
-        <div class="input-group">
-            <label for="height">Trim Height (inches)</label>
-            <input type="number" id="height" value="9" step="0.1">
-        </div>
-
-        <div class="input-group">
-            <label for="pages">Total Page Count</label>
-            <input type="number" id="pages" value="120">
-        </div>
-
-        <button onclick="calculateCover()">Calculate Dimensions</button>
-
-        <div id="results">
-            <div class="result-item">
-                <span class="result-label">Spine Width</span>
-                <span class="result-value"><span id="spine"></span>"</span>
-            </div>
-            <div class="result-item">
-                <span class="result-label">Full Cover Width</span>
-                <span class="result-value"><span id="totalWidth"></span>"</span>
-            </div>
-            <div class="result-item">
-                <span class="result-label">Full Cover Height</span>
-                <span class="result-value"><span id="totalHeight"></span>"</span>
-            </div>
-        </div>
-
-        <div class="upsell-card">
-            <h3>Still getting PDF layout errors?</h3>
-            <p>Whether it is a custom blood pressure logbook or a complex manuscript, I will professionally fix your bleed areas and format your cover for guaranteed KDP approval for just $10.</p>
-            <!-- Pre-filled email link -->
-            <a href="mailto:anilovbaker@gmail.com?subject=KDP%20Cover%20Formatting%20Help">Hire Me to Fix Your File</a>
-        </div>
+  <header class="nav" id="nav">
+    <div class="wrap nav-inner">
+      <a href="#top" class="brand">
+        <img src="favicon.svg" alt="" width="34" height="34">
+        <span data-setting="storeName">Anilovbaker Picks</span>
+      </a>
+      <nav class="nav-links">
+        <a href="#featured" id="nav-featured" hidden>Featured</a>
+        <a href="#shop">Shop</a>
+        <a href="#about">About</a>
+      </nav>
+      <a href="#shop" class="btn btn-small btn-dark">Browse picks</a>
     </div>
+  </header>
 
-    <script>
-        function calculateCover() {
-            const width = parseFloat(document.getElementById('width').value);
-            const height = parseFloat(document.getElementById('height').value);
-            const pages = parseInt(document.getElementById('pages').value);
-            
-            if(!width || !height || !pages) return;
+  <main id="top">
+    <section class="hero">
+      <div class="hero-bg" aria-hidden="true">
+        <span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span>
+        <div class="grid-overlay"></div>
+      </div>
+      <div class="wrap hero-inner">
+        <div class="hero-copy reveal">
+          <span class="eyebrow"><span class="dot"></span><span data-setting="tagline">Hand-picked Amazon finds worth your money</span></span>
+          <h1 data-setting="heroTitle">Smart finds, honestly picked.</h1>
+          <p class="lead" data-setting="heroSubtitle">A curated collection of the Amazon products I actually recommend.</p>
+          <div class="hero-actions">
+            <a href="#shop" class="btn btn-primary">Explore the collection <span aria-hidden="true">&rarr;</span></a>
+            <a href="#about" class="btn btn-ghost">How it works</a>
+          </div>
+          <div class="hero-stats">
+            <div><strong id="stat-products">0</strong><span>Curated picks</span></div>
+            <div><strong id="stat-categories">0</strong><span>Categories</span></div>
+            <div><strong>100%</strong><span>Secure Amazon checkout</span></div>
+          </div>
+        </div>
+        <div class="hero-visual reveal" aria-hidden="true">
+          <div class="stack" id="hero-stack">
+            <div class="stack-card s1"><div class="ph"></div></div>
+            <div class="stack-card s2"><div class="ph"></div></div>
+            <div class="stack-card s3"><div class="ph"></div></div>
+          </div>
+          <div class="float-pill fp1"><svg viewBox="0 0 24 24" width="18" height="18" fill="#ffb703" aria-hidden="true"><path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg> Top rated finds</div>
+          <div class="float-pill fp2"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#ff7a45" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h11v10H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg> Fast Amazon delivery</div>
+        </div>
+      </div>
+    </section>
 
-            const spineWidth = pages * 0.002252;
-            const bleed = 0.125;
-            
-            const totalWidth = (width * 2) + spineWidth + (bleed * 2);
-            const totalHeight = height + (bleed * 2);
+    <section class="trust">
+      <div class="wrap trust-inner">
+        <div class="trust-item"><span class="ti-icon"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 6v6c0 4.5 3.4 8.2 8 9 4.6-.8 8-4.5 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg></span><div><strong>Carefully curated</strong><span>Only products worth recommending</span></div></div>
+        <div class="trust-item"><span class="ti-icon"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></span><div><strong>Buy safely on Amazon</strong><span>Checkout, shipping &amp; returns by Amazon</span></div></div>
+        <div class="trust-item"><span class="ti-icon"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></svg></span><div><strong>Always up to date</strong><span>New picks added regularly</span></div></div>
+      </div>
+    </section>
 
-            document.getElementById('spine').innerText = spineWidth.toFixed(3);
-            document.getElementById('totalWidth').innerText = totalWidth.toFixed(3);
-            document.getElementById('totalHeight').innerText = totalHeight.toFixed(3);
-            
-            document.getElementById('results').style.display = 'block';
-        }
-    </script>
+    <section class="section" id="featured" hidden>
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <span class="kicker">Editor's choice</span>
+            <h2>Featured picks</h2>
+          </div>
+        </div>
+        <div class="featured-grid" id="featured-grid"></div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="shop">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div>
+            <span class="kicker">The collection</span>
+            <h2>Shop all picks</h2>
+          </div>
+          <div class="tools">
+            <label class="search">
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M11 19a8 8 0 1 1 0-16 8 8 0 0 1 0 16Zm10 2-4.35-4.35"/></svg>
+              <input type="search" id="search" placeholder="Search products..." aria-label="Search products">
+            </label>
+            <select id="sort" aria-label="Sort products">
+              <option value="default">Recommended</option>
+              <option value="newest">Newest first</option>
+              <option value="az">Name A–Z</option>
+            </select>
+          </div>
+        </div>
+        <div class="chips" id="chips" role="tablist" aria-label="Filter by category"></div>
+        <div class="grid" id="grid" aria-live="polite"></div>
+        <div class="empty" id="empty" hidden>
+          <div class="empty-icon"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1.2 11.1A2 2 0 0 1 15.8 21H8.2a2 2 0 0 1-2-1.9L5 8Z"/><path d="M9 10V7a3 3 0 0 1 6 0v3"/></svg></div>
+          <h3 id="empty-title">New picks are on the way</h3>
+          <p id="empty-text">Fresh finds are being hand-picked right now. Check back very soon!</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="wrap about">
+        <div class="about-copy reveal">
+          <span class="kicker">How it works</span>
+          <h2>Find it here. Buy it on Amazon.</h2>
+          <p>Every product on this page is hand-picked. When you click <em>View on Amazon</em> you go straight to the product on Amazon, where you can check the latest price, read reviews and buy with Amazon's secure checkout, fast delivery and easy returns.</p>
+        </div>
+        <ol class="steps reveal">
+          <li><span>1</span><div><strong>Browse</strong><p>Explore curated picks by category or search for what you need.</p></div></li>
+          <li><span>2</span><div><strong>Click through</strong><p>Tap "View on Amazon" to see the live price and reviews.</p></div></li>
+          <li><span>3</span><div><strong>Buy with confidence</strong><p>Amazon handles payment, shipping and returns.</p></div></li>
+        </ol>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <div>
+        <a href="#top" class="brand brand-light"><img src="favicon.svg" alt="" width="30" height="30"><span data-setting="storeName">Anilovbaker Picks</span></a>
+        <p class="disclosure"><strong>Affiliate disclosure:</strong> As an Amazon Associate I earn from qualifying purchases. Clicking a product link takes you to Amazon; if you buy, I may earn a small commission at no extra cost to you. Prices and availability are shown on Amazon and may change.</p>
+      </div>
+      <div class="footer-meta">
+        <a id="contact-link" href="mailto:anilovbaker@gmail.com">Contact</a>
+        <span>&copy; <span id="year"></span> <span data-setting="storeName">Anilovbaker Picks</span></span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/common.js"></script>
+  <script src="assets/js/store.js"></script>
 </body>
 </html>
