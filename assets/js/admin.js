@@ -348,6 +348,7 @@
 
     var btn = $('save-product');
     var wasEditing = editingId;
+    var backup = JSON.stringify(data.products);
     setBusy(btn, true, pendingFile ? 'Uploading image...' : 'Publishing...');
     setLoading(true);
 
@@ -378,6 +379,7 @@
         renderAll();
       });
     }).catch(function (err) {
+      if (err.status !== 409 && err.status !== 422) { data.products = JSON.parse(backup); renderAll(); }
       toast(friendlyError(err), 'err', 7000);
       if (err.status === 401) logout();
     }).finally(function () {
