@@ -7,5 +7,17 @@
     "associateTag": "itsanilovbake-20",
     "contactEmail": "reha0748@gmail.com"
   },
-  "products": []
+  "products": [
+    {
+      "id": "mwppru7gu6fx",
+      "title": "Owala FreeSip Insulated Stainless Steel Water Bottle",
+      "link": "https://link.amazon/B02Xvya2J",
+      "image": "images/products/1795223586257-owala-freesip-insulated-stainless-steel-water-bottle.webp",
+      "category": "Kitchen",
+      "badge": "Best Seller",
+      "description": "I recommend the Owala FreeSip because its patented two-in-one spout lets you either sip upright through a built-in straw or tilt it back to swig. On top of that, its push-button locking lid keeps the mouthpiece completely clean and leakproof while insulated stainless steel keeps your drinks ice-cold",
+      "featured": true,
+      "createdAt": "2026-11-21T01:13:08.525Z"
+    }
+  ]
 }
