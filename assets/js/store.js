@@ -31,7 +31,9 @@
       if (v) el.textContent = v;
     });
     if (s.storeName) document.title = s.storeName + ' | ' + (s.tagline || 'Hand-picked Amazon Finds');
-    if (s.contactEmail) document.getElementById('contact-link').href = 'mailto:' + s.contactEmail;
+    var contact = document.getElementById('contact-link');
+    if (s.contactEmail) contact.href = 'mailto:' + s.contactEmail;
+    else if ('contactEmail' in s) contact.hidden = true;
   }
 
   function link(p) {
