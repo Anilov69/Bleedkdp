@@ -22,6 +22,7 @@
   var pendingFile = null;
   var pendingFileUrl = null;
   var saveChain = Promise.resolve();
+  var conflictGeneration = 0;
 
   var $ = function (id) { return document.getElementById(id); };
 
@@ -112,7 +113,13 @@
   }
 
   function saveData(message) {
+    var generation = conflictGeneration;
     var run = function () {
+      if (generation !== conflictGeneration) {
+        var stale = new Error('Stale change after conflict');
+        stale.status = 409;
+        return Promise.reject(stale);
+      }
       var body = {
         message: message,
         content: encodeUtf8(JSON.stringify(data, null, 2) + '\n'),
@@ -123,6 +130,7 @@
         sha = res.content.sha;
       }).catch(function (err) {
         if (err.status === 409 || err.status === 422) {
+          conflictGeneration++;
           return loadData().then(function () { renderAll(); throw err; });
         }
         throw err;
