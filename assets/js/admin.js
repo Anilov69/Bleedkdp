@@ -351,7 +351,7 @@
 
     var btn = $('save-product');
     var wasEditing = editingId;
-    var backup = JSON.stringify(data.products);
+    var productId = null, previous = null;
     setBusy(btn, true, pendingFile ? 'Uploading image...' : 'Publishing...');
     setLoading(true);
 
@@ -359,7 +359,7 @@
     imageStep.then(function (imagePath) {
       btn.textContent = 'Publishing...';
       var product = {
-        id: wasEditing || (Date.now().toString(36) + Math.random().toString(36).slice(2, 6)),
+        id: productId = wasEditing || (Date.now().toString(36) + Math.random().toString(36).slice(2, 6)),
         title: v.title,
         link: v.link,
         image: imagePath || '',
@@ -370,7 +370,8 @@
       };
       if (wasEditing) {
         var idx = data.products.findIndex(function (x) { return x.id === wasEditing; });
-        product.createdAt = (data.products[idx] || {}).createdAt || new Date().toISOString();
+        previous = idx >= 0 ? data.products[idx] : null;
+        product.createdAt = (previous || {}).createdAt || new Date().toISOString();
         if (idx >= 0) data.products[idx] = product; else data.products.unshift(product);
       } else {
         product.createdAt = new Date().toISOString();
@@ -382,7 +383,11 @@
         renderAll();
       });
     }).catch(function (err) {
-      if (err.status !== 409 && err.status !== 422) { data.products = JSON.parse(backup); renderAll(); }
+      if (productId && err.status !== 409 && err.status !== 422) {
+        var i = data.products.findIndex(function (x) { return x.id === productId; });
+        if (i >= 0) { if (previous) data.products[i] = previous; else data.products.splice(i, 1); }
+        renderAll();
+      }
       toast(friendlyError(err), 'err', 7000);
       if (err.status === 401) logout();
     }).finally(function () {
