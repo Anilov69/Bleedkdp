@@ -67,7 +67,7 @@
         '<span class="badge badge-inline">' + esc(p.badge || 'Featured') + '</span>' +
         '<h3>' + esc(p.title) + '</h3>' +
         (p.description ? '<p>' + esc(p.description) + '</p>' : '') +
-        '<a class="btn btn-amazon" href="' + esc(link(p)) + '" target="_blank" rel="nofollow sponsored noopener">Check price on Amazon <span aria-hidden="true">&rarr;</span></a>' +
+        '<a class="btn btn-amazon" href="' + esc(link(p)) + '" target="_blank" rel="nofollow sponsored noopener">View on Amazon <span aria-hidden="true">&rarr;</span></a>' +
       '</div>' +
     '</article>';
   }
