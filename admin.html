@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Store Admin</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/admin.css">
+</head>
+<body>
+  <!-- Login -->
+  <section class="login" id="login-view" hidden>
+    <div class="login-card">
+      <div class="login-brand"><img src="favicon.svg" alt="" width="44" height="44"><div><strong>Store Admin</strong><span>Manage your Amazon picks</span></div></div>
+      <form id="login-form" autocomplete="off">
+        <label>GitHub access token
+          <input type="password" id="token" placeholder="github_pat_..." required>
+        </label>
+        <details class="advanced">
+          <summary>Repository settings</summary>
+          <label>Repository (owner/name)
+            <input type="text" id="repo" value="Anilov69/Bleedkdp" required>
+          </label>
+          <label>Branch
+            <input type="text" id="branch" value="main" required>
+          </label>
+        </details>
+        <button class="btn btn-primary btn-block" type="submit" id="login-btn">Sign in</button>
+        <p class="error" id="login-error" hidden></p>
+      </form>
+      <details class="help">
+        <summary>How do I get a token? (one-time, 2 minutes)</summary>
+        <ol>
+          <li>Open <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">GitHub &rarr; New fine-grained token</a>.</li>
+          <li>Name it e.g. <em>Store admin</em> and choose an expiration (e.g. 1 year).</li>
+          <li>Under <strong>Repository access</strong> choose <em>Only select repositories</em> &rarr; <strong>Bleedkdp</strong>.</li>
+          <li>Under <strong>Permissions &rarr; Repository permissions</strong> set <strong>Contents</strong> to <em>Read and write</em>.</li>
+          <li>Click <strong>Generate token</strong>, copy it and paste it above.</li>
+        </ol>
+        <p>The token is stored only in this browser. Anyone without it can't change your store.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- Dashboard -->
+  <div class="app" id="app-view" hidden>
+    <header class="topbar">
+      <div class="topbar-inner">
+        <div class="tb-brand"><img src="favicon.svg" alt="" width="32" height="32"><span id="tb-store">Store Admin</span></div>
+        <nav class="tabs" role="tablist">
+          <button class="tab active" data-tab="products" role="tab">Products</button>
+          <button class="tab" data-tab="settings" role="tab">Settings</button>
+        </nav>
+        <div class="tb-actions">
+          <a class="btn btn-light btn-sm" href="./" target="_blank" rel="noopener">View store &nearr;</a>
+          <button class="btn btn-text btn-sm" id="logout">Sign out</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <!-- Products tab -->
+      <section data-panel="products">
+        <div class="tag-warning" id="tag-warning" hidden>
+          <strong>Add your Associates tracking ID.</strong> Set it once in <button class="link" data-goto="settings">Settings</button> and it's automatically added to every full Amazon link, so you always get credit.
+        </div>
+
+        <div class="layout">
+          <div class="panel" id="editor">
+            <div class="panel-head">
+              <h2 id="form-title">Add a product</h2>
+              <button class="btn btn-text btn-sm" id="cancel-edit" type="button" hidden>Cancel editing</button>
+            </div>
+            <form id="product-form" novalidate>
+              <label>Amazon link <span class="req">*</span>
+                <input type="url" id="f-link" placeholder="Paste your Amazon / SiteStripe link (amzn.to/... or amazon.com/...)" required>
+                <small class="hint" id="link-hint">Tip: use Amazon's SiteStripe bar &rarr; "Get Link" to copy your affiliate link.</small>
+              </label>
+              <label>Product name <span class="req">*</span>
+                <input type="text" id="f-title" maxlength="140" placeholder="e.g. Stanley Quencher Tumbler 40oz" required>
+              </label>
+              <div class="field">
+                <span class="field-label">Product image</span>
+                <div class="image-picker">
+                  <div class="drop" id="drop">
+                    <input type="file" id="f-file" accept="image/*">
+                    <div class="drop-inner"><strong>Drop an image</strong> or click to upload<br><small>JPG, PNG or WEBP — auto-optimized</small></div>
+                  </div>
+                  <div class="or">or</div>
+                  <input type="url" id="f-image" placeholder="Paste image address (right-click product image on Amazon → Copy image address)">
+                </div>
+              </div>
+              <div class="row">
+                <label>Category
+                  <input type="text" id="f-category" list="category-list" maxlength="40" placeholder="e.g. Kitchen">
+                  <datalist id="category-list"></datalist>
+                </label>
+                <label>Badge <small>(optional)</small>
+                  <input type="text" id="f-badge" list="badge-list" maxlength="24" placeholder="e.g. Best Seller">
+                  <datalist id="badge-list"><option value="Best Seller"><option value="Top Pick"><option value="New"><option value="Deal"><option value="Gift Idea"><option value="Trending"></datalist>
+                </label>
+              </div>
+              <label>Short description <small>(optional)</small>
+                <textarea id="f-description" rows="3" maxlength="300" placeholder="Why you recommend it, in one or two sentences."></textarea>
+              </label>
+              <label class="switch">
+                <input type="checkbox" id="f-featured">
+                <span class="track"></span>
+                <span>Feature this product at the top of the store</span>
+              </label>
+              <button class="btn btn-primary btn-block" type="submit" id="save-product">Publish product</button>
+            </form>
+          </div>
+
+          <aside class="panel preview-panel">
+            <div class="panel-head"><h2>Live preview</h2></div>
+            <div class="pcard">
+              <div class="pcard-media" id="p-media"><div class="img-fallback"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1.2 11.1A2 2 0 0 1 15.8 21H8.2a2 2 0 0 1-2-1.9L5 8Z"/><path d="M9 10V7a3 3 0 0 1 6 0v3"/></svg></div><span class="badge" id="p-badge" hidden></span></div>
+              <div class="pcard-body">
+                <span class="pcard-cat" id="p-cat"></span>
+                <h3 id="p-title">Product name</h3>
+                <p id="p-desc"></p>
+                <span class="btn btn-amazon">View on Amazon &rarr;</span>
+              </div>
+            </div>
+            <p class="final-link">Visitors will go to:<br><code id="p-link">—</code></p>
+          </aside>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Your products <span class="count" id="count">0</span></h2>
+            <input type="search" id="list-search" placeholder="Search your products..." class="list-search">
+          </div>
+          <ul class="plist" id="plist"></ul>
+          <div class="plist-empty" id="plist-empty">No products yet — add your first one above.</div>
+        </div>
+      </section>
+
+      <!-- Settings tab -->
+      <section data-panel="settings" hidden>
+        <div class="panel narrow">
+          <div class="panel-head"><h2>Store settings</h2></div>
+          <form id="settings-form">
+            <label>Amazon Associates tracking ID
+              <input type="text" id="s-associateTag" placeholder="e.g. anilovbaker-20">
+              <small class="hint">Find it in Amazon Associates Central (top-right). Added automatically to full amazon.* links that don't already include a tag.</small>
+            </label>
+            <label>Store name <input type="text" id="s-storeName" maxlength="60" required></label>
+            <label>Tagline <input type="text" id="s-tagline" maxlength="90"></label>
+            <label>Homepage headline <input type="text" id="s-heroTitle" maxlength="80"></label>
+            <label>Homepage intro <textarea id="s-heroSubtitle" rows="3" maxlength="260"></textarea></label>
+            <label>Contact email <input type="email" id="s-contactEmail"></label>
+            <button class="btn btn-primary" type="submit" id="save-settings">Save settings</button>
+          </form>
+        </div>
+        <div class="panel narrow">
+          <div class="panel-head"><h2>Backup</h2></div>
+          <p class="muted">Download a copy of all products and settings.</p>
+          <button class="btn btn-light" id="download-backup" type="button">Download backup (.json)</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="loading" id="loading"><div class="spinner"></div></div>
+  <div class="toasts" id="toasts" aria-live="polite"></div>
+
+  <script src="assets/js/common.js"></script>
+  <script src="assets/js/admin.js"></script>
+</body>
+</html>
